@@ -15,7 +15,7 @@ struct Ballot
   
   void remove()
   {
-    votes.erase(front);
+    votes.erase(votes.front());
   }
 };
 
@@ -32,7 +32,7 @@ string addCandidates(map<string,int> & map)
 int main()
 {
   vector<string> candNames;
-  int numCands, numSeats, numVoters, seatsFilled, votes;
+  int numCands, numSeats, numVoters, seatsFilled, votes, quota, surplus;
 
   cout << "How many candidates are there? : ";
   cin >> numCands;
@@ -41,6 +41,9 @@ int main()
   cout << "How many voters are there? : ";
   cin >> numVoters;
 
+  quota = (numVoters/(numSeats+1))+1;
+
+  vector<string> winners;
   vector<Ballot> ballots;
   map<string,int> candidates;
   
@@ -67,18 +70,40 @@ int main()
 
   while(seatsFilled < numSeats)
   {
+    //Tallies every voter's first vote and adds it to candidate
     for(int i = 0; i < numCands; i++)
     {
-      for(intj = 0; j < ballots.size(); j++)
+      votes = 0;
+      for(int j = 0; j < ballots.size(); j++)
       {
-        if(candNames[i]==ballots[j].votes[0])
+        if(candNames[i] == ballots[j].votes[0])
         {
-         votes++;
+          votes++;
         }
       }
       
       candidates[candNames[i]] = votes;
     }
+
+    //Does candidate meet/exceed quota
+    for(int i = 0; i < numCands; i++)
+    {
+      if(candidates[candNames[i]] >= quota)
+      {
+        winners.push_back(candNames[i]);
+        seatsFilled++;
+        surplus = candidate[winners.back()]-quota;
+        if(surplus)
+        {
+
+        }
+        else
+        {
+          candidate[winners.back()].erase();
+        }
+      }
+    }
+    
   }
   
   return 0;
