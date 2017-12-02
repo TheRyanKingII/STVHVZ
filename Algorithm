@@ -1,23 +1,64 @@
 
 
-struct Ballots
+struct Ballot
 {
-  string first = 
+  vector<string> votes;
+  
+  void add(string s)
+    votes.push_back(s);
 };
 
-----------------------------------------------------------
-int main()
-{
-  int numCands;
-  HashMap<string,int> candidates;
-  for(int i = 0; i < numCands; i++)
-    addCandidates(candidates);
-  
-}
-void addCandidates(HashMap<string,int> & map)
+string addCandidates(HashMap<string,int> & map)
 {
   string n;
   cout << "Enter candidate's name: ";
   cin >> n;
   map[n] = 0;
+  return n;
 }
+
+----------------------------------------------------------
+int main()
+{
+  vector<string> candNames;
+  int numCands, numSeats, numVoters;
+  cout << "How many candidates are there? : ";
+  cin >> numCands;
+  cout << "How many seats are there? : ";
+  cin >> numSeats;
+  cout << "How many voters are there? : ";
+  cin >> numVoters;
+  vector<Ballot> ballots;
+  HashMap<string,int> candidates;
+  for(int i = 0; i < numCands; i++)
+    candNames.push_back(addCandidates(candidates));
+  cout << endl;
+  
+  //Gets all the votes from voters
+  for(int i = 0; i < numVoters; i++)
+  {
+    for(int j = 0; j < numCands; j++)
+    {
+      cout << "Candidate " << j+1 << candNames[0] << endl;
+    }
+    Ballot b;
+    int n;
+    for(int j = 0; j < numCands; j++)
+    {
+      cin >> n;
+      b.add(candNames[n-1]);
+    }
+    cout << endl;
+  }
+  
+  
+}
+
+
+
+
+
+
+
+
+
