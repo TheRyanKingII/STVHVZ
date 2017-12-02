@@ -12,6 +12,11 @@ struct Ballot
   {
     votes.push_back(s);
   }
+  
+  void remove()
+  {
+    votes.erase(front);
+  }
 };
 
 string addCandidates(map<string,int> & map)
@@ -27,7 +32,7 @@ string addCandidates(map<string,int> & map)
 int main()
 {
   vector<string> candNames;
-  int numCands, numSeats, numVoters;
+  int numCands, numSeats, numVoters, seatsFilled, votes;
 
   cout << "How many candidates are there? : ";
   cin >> numCands;
@@ -60,5 +65,21 @@ int main()
     cout << endl;
   }
 
+  while(seatsFilled < numSeats)
+  {
+    for(int i = 0; i < numCands; i++)
+    {
+      for(intj = 0; j < ballots.size(); j++)
+      {
+        if(candNames[i]==ballots[j].votes[0])
+        {
+         votes++;
+        }
+      }
+      
+      candidates
+    }
+  }
+  
   return 0;
 }
