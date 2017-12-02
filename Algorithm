@@ -1,14 +1,20 @@
+#include<iostream>
+#include<vector>
+#include<map>
 
+using namespace std;
 
 struct Ballot
 {
   vector<string> votes;
   
   void add(string s)
+  {
     votes.push_back(s);
+  }
 };
 
-string addCandidates(HashMap<string,int> & map)
+string addCandidates(map<string,int> & map)
 {
   string n;
   cout << "Enter candidate's name: ";
@@ -17,19 +23,22 @@ string addCandidates(HashMap<string,int> & map)
   return n;
 }
 
-----------------------------------------------------------
+//----------------------------------------------------------
 int main()
 {
   vector<string> candNames;
   int numCands, numSeats, numVoters;
+
   cout << "How many candidates are there? : ";
   cin >> numCands;
   cout << "How many seats are there? : ";
   cin >> numSeats;
   cout << "How many voters are there? : ";
   cin >> numVoters;
+
   vector<Ballot> ballots;
-  HashMap<string,int> candidates;
+  map<string,int> candidates;
+  
   for(int i = 0; i < numCands; i++)
     candNames.push_back(addCandidates(candidates));
   cout << endl;
@@ -39,7 +48,7 @@ int main()
   {
     for(int j = 0; j < numCands; j++)
     {
-      cout << "Candidate " << j+1 << candNames[0] << endl;
+      cout << "Candidate " << j+1 << ": " << candNames[j] << endl;
     }
     Ballot b;
     int n;
@@ -50,15 +59,6 @@ int main()
     }
     cout << endl;
   }
-  
-  
+
+  return 0;
 }
-
-
-
-
-
-
-
-
-
