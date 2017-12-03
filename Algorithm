@@ -6,115 +6,124 @@ using namespace std;
 
 struct Ballot
 {
-  vector<string> votes;
-  
-  void add(string s)
-  {
-    votes.push_back(s);
-  }
-  
-  void remove()
-  {
-    votes.erase(votes.front());
-  }
+	vector<string> votes;
+
+	void add(string s)
+	{
+		votes.push_back(s);
+	}
+
+	void remove()
+	{
+		votes.erase(votes.begin());
+	}
 };
 
-string addCandidates(map<string,int> & map)
+string addCandidates(map<string, int> & map)
 {
-  string n;
-  cout << "Enter candidate's name: ";
-  cin >> n;
-  map[n] = 0;
-  return n;
+	string n;
+	cout << "Enter candidate's name: ";
+	cin >> n;
+	map[n] = 0;
+	return n;
 }
+
+
 
 //----------------------------------------------------------
 int main()
 {
-  vector<string> candNames;
-  int numCands, numSeats, numVoters, seatsFilled, votes, quota, surplus;
+	vector<string> candNames;
+	int numCands, numSeats, numVoters, seatsFilled, votes, quota, surplus;
 
-  cout << "How many candidates are there? : ";
-  cin >> numCands;
-  cout << "How many seats are there? : ";
-  cin >> numSeats;
-  cout << "How many voters are there? : ";
-  cin >> numVoters;
+	cout << "How many candidates are there? : ";
+	cin >> numCands;
+	cout << "How many seats are there? : ";
+	cin >> numSeats;
+	cout << "How many voters are there? : ";
+	cin >> numVoters;
 
-  quota = (numVoters/(numSeats+1))+1;
+	quota = (numVoters / (numSeats + 1)) + 1;
 
-  vector<string> winners;
-  vector<Ballot> ballots;
-  map<string,int> candidates;
-  
-  for(int i = 0; i < numCands; i++)
-    candNames.push_back(addCandidates(candidates));
-  cout << endl;
-  
-  //Gets all the votes from voters
-  for(int i = 0; i < numVoters; i++)
-  {
-    for(int j = 0; j < numCands; j++)
-    {
-      cout << "Candidate " << j+1 << ": " << candNames[j] << endl;
-    }
-    Ballot b;
-    int n;
-    for(int j = 0; j < numCands; j++)
-    {
-      cin >> n;
-      b.add(candNames[n-1]);
-    }
-    cout << endl;
-  }
+	vector<string> winners;
+	vector<Ballot> ballots;
+	map<string, int> candidates;
 
-  while(seatsFilled < numSeats)
-  {
-    //Tallies every voter's first vote and adds it to candidate
-    for(int i = 0; i < numCands; i++)
-    {
-      votes = 0;
-      for(int j = 0; j < ballots.size(); j++)
-      {
-        if(candNames[i] == ballots[j].votes[0])
-        {
-          votes++;
-        }
-      }
-      
-      candidates[candNames[i]] = votes;
-    }
+	for (int i = 0; i < numCands; i++)
+		candNames.push_back(addCandidates(candidates));
+	cout << endl;
 
-    //Does candidate meet/exceed quota
-    for(int i = 0; i < numCands; i++)
-    {
-      if(candidates[candNames[i]] >= quota)
-      {
-        winners.push_back(candNames[i]);
-        seatsFilled++;
-        surplus = candidate[winners.back()]-quota;
-        if(surplus > 0)
-        {
-          map<string,int> proportions;
-          for(int x = 0; x < numCands; x++)
-          {
-            for(int y = 0; y < surplus; y++)
-            {
-              if()
-              {
-                
-              }
-            }
-          }
-        }
-        else
-        {
-          candidate[winners.back()].erase();
-        }
-      }
-    }
-    
-  }
-  
-  return 0;
+	//Gets all the votes from voters
+	for (int i = 0; i < numVoters; i++)
+	{
+		for (int j = 0; j < numCands; j++)
+		{
+			cout << "Candidate " << j + 1 << ": " << candNames.at(j) << endl;
+		}
+		Ballot b;
+		int n;
+		for (int j = 0; j < numCands; j++)
+		{
+			cin >> n;
+			b.add(candNames[n - 1]);
+		}
+		cout << endl;
+	}
+
+	while (seatsFilled < numSeats)
+	{
+		//Tallies every voter's first vote and adds it to candidate
+		for (int i = 0; i < numCands; i++)
+		{
+			votes = 0;
+			for (int j = 0; j < ballots.size(); j++)
+			{
+				if (candNames[i] == ballots[j].votes[0])
+				{
+					votes++;
+				}
+			}
+
+			candidates[candNames[i]] = votes;
+		}
+
+		//Does candidate meet/exceed quota
+		for (int i = 0; i < numCands; i++)
+		{
+			if (candidates[candNames[i]] >= quota)
+			{
+				winners.push_back(candNames[i]);
+				seatsFilled++;
+				surplus = candidates[winners.back()] - quota;
+				if (surplus > 0)
+				{
+					map<string, int> proportions;
+					for (int z = 0; z < numCands; z++)
+					{
+						proportions.
+					}
+					for (int x = 0; x < numCands; x++)
+					{
+						for (int y = 0; y < candidates[winners.back()]; y++)
+						{
+							if (ballots[i].votes[i] == winners.back && i + 1 < numCands)
+							{
+								if (candNames[i] == ballots[i].votes[i+1])
+								{
+									proportions[candNames[1]]++;
+								}
+							}
+						}
+					}
+				}
+				else
+				{
+					candidates[winners.back()].erase();
+				}
+			}
+		}
+
+	}
+
+	return 0;
 }
