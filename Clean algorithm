@@ -27,7 +27,7 @@ int main()
 
 	getVotes(numVoters, numCands, candNames);
 
-	while(seatsFilled < numSeats)
+	while (seatsFilled < numSeats)
 	{
 		//Tallies every voter's first vote and adds it to candidate
 		for (int i = 0; i < numCands; i++)
@@ -52,26 +52,30 @@ int main()
 				winners.push_back(candNames[i]);
 				seatsFilled++;
 				surplus = candidates[winners.back()] - quota;
-				if (surplus > 0)
+				if (surplus > 0 && seatsFilled != numSeats)
 				{
-					map<string, int> proportions;
+					map<string, int> proportions = candidates;
 					for (int z = 0; z < numCands; z++)
 					{
-						proportions.
-					}
-					for (int x = 0; x < numCands; x++)
+						proportions[candNames[z]] = 0;
+					}					
+					for (int y = 0; y < candidates[winners.back()]; y++)
 					{
-						for (int y = 0; y < candidates[winners.back()]; y++)
+						if (ballots[i].votes[i] == winners.back && i + 1 < numCands)
 						{
-							if (ballots[i].votes[i] == winners.back && i + 1 < numCands)
+							for (int x = 0; x < numCands; x++)
 							{
-								if (candNames[i] == ballots[i].votes[i+1])
+								if (candNames[x] == ballots[i].votes[i+1])
 								{
-									proportions[candNames[1]]++;
+									proportions[candNames[x]]++;
 								}
 							}
 						}
 					}
+					for (int z = 0; z < numCands; z++)
+					{
+						candidates[candNames[z]] += ((proportions[candNames[z]] / candidates[winners.back()]) * surplus);
+					}					
 				}
 				else
 				{
