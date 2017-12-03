@@ -96,7 +96,6 @@ int main()
 					}					
 				}
 				else
-				else
 				{
 					candidates[winners.back()].erase();
 				}
