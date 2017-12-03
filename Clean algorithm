@@ -2,15 +2,20 @@
 #include<string>
 #include<vector>
 #include<map>
-#include "ballot.h";
+#include "ballot.h"
 
 using namespace std;
+
+void getBasicInfo(int & numCands, int & numSeats, int & numVoters);
+void getNames(int & numCands, vector<string> & candNames, map<string,int> & candidates);
+void getVotes(int & numVoters, int & numCands, vector<string> candNames);
+string addCandidates(map<string, int> & map);
 
 //****************************************************************************************************
 
 int main()
 {
-	int numCands, numSeats, numVoters, seatsFilled, votes, quota, surplus;
+	int numCands, numSeats, numVoters, seatsFilled = 0, votes, quota, surplus;
 
 	vector<string> candNames;
 	vector<string> winners;
@@ -61,7 +66,7 @@ int main()
 					}					
 					for (int y = 0; y < candidates[winners.back()]; y++)
 					{
-						if (ballots[i].votes[i] == winners.back && i + 1 < numCands)
+						if (ballots[i].votes[i] == winners[winners.size()-1] && i + 1 < numCands)
 						{
 							for (int x = 0; x < numCands; x++)
 							{
