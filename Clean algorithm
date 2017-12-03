@@ -8,7 +8,7 @@ using namespace std;
 
 void getBasicInfo(int & numCands, int & numSeats, int & numVoters);
 void getNames(int & numCands, vector<string> & candNames, map<string,int> & candidates);
-void getVotes(int & numVoters, int & numCands, vector<string> candNames);
+void getVotes(int & numVoters, int & numCands, vector<string> candNames, vector<Ballot> & ballots);
 string addCandidates(map<string, int> & map);
 
 //****************************************************************************************************
@@ -30,7 +30,7 @@ int main()
 
 	cout << endl;
 
-	getVotes(numVoters, numCands, candNames);
+	getVotes(numVoters, numCands, candNames, ballots);
 
 	while (seatsFilled < numSeats)
 	{
@@ -119,7 +119,7 @@ void getNames(int & numCands, vector<string> & candNames, map<string,int> & cand
 //****************************************************************************************************
 
 //Gets all the votes from voters
-void getVotes(int & numVoters, int & numCands, vector<string> candNames)
+void getVotes(int & numVoters, int & numCands, vector<string> candNames, vector<Ballot> & ballots)
 {
 	for(int i = 0; i < numVoters; i++)
 	{
@@ -134,6 +134,9 @@ void getVotes(int & numVoters, int & numCands, vector<string> candNames)
 			cin >> n;
 			b.add(candNames[n - 1]);
 		}
+
+		ballots.push_back(b);
+
 		cout << endl;
 	}
 }
