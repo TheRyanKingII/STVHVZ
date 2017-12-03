@@ -1,76 +1,33 @@
 #include<iostream>
+#include<string>
 #include<vector>
 #include<map>
+#include "ballot.h";
 
 using namespace std;
 
-struct Ballot
-{
-	vector<string> votes;
+//****************************************************************************************************
 
-	void add(string s)
-	{
-		votes.push_back(s);
-	}
-
-	void remove()
-	{
-		votes.erase(votes.begin());
-	}
-};
-
-string addCandidates(map<string, int> & map)
-{
-	string n;
-	cout << "Enter candidate's name: ";
-	cin >> n;
-	map[n] = 0;
-	return n;
-}
-
-
-
-//----------------------------------------------------------
 int main()
 {
-	vector<string> candNames;
 	int numCands, numSeats, numVoters, seatsFilled, votes, quota, surplus;
 
-	cout << "How many candidates are there? : ";
-	cin >> numCands;
-	cout << "How many seats are there? : ";
-	cin >> numSeats;
-	cout << "How many voters are there? : ";
-	cin >> numVoters;
-
-	quota = (numVoters / (numSeats + 1)) + 1;
-
+	vector<string> candNames;
 	vector<string> winners;
 	vector<Ballot> ballots;
 	map<string, int> candidates;
 
-	for (int i = 0; i < numCands; i++)
-		candNames.push_back(addCandidates(candidates));
+	getBasicInfo(numCands, numSeats, numVoters);
+
+	quota = (numVoters / (numSeats + 1)) + 1;
+
+	getNames(numCands, candNames, candidates);
+
 	cout << endl;
 
-	//Gets all the votes from voters
-	for (int i = 0; i < numVoters; i++)
-	{
-		for (int j = 0; j < numCands; j++)
-		{
-			cout << "Candidate " << j + 1 << ": " << candNames.at(j) << endl;
-		}
-		Ballot b;
-		int n;
-		for (int j = 0; j < numCands; j++)
-		{
-			cin >> n;
-			b.add(candNames[n - 1]);
-		}
-		cout << endl;
-	}
+	getVotes(numVoters, numCands, candNames);
 
-	while (seatsFilled < numSeats)
+	while(seatsFilled < numSeats)
 	{
 		//Tallies every voter's first vote and adds it to candidate
 		for (int i = 0; i < numCands; i++)
@@ -127,3 +84,64 @@ int main()
 
 	return 0;
 }
+
+//****************************************************************************************************
+
+void getBasicInfo(int & numCands, int & numSeats, int & numVoters)
+{
+	cout << "How many candidates are there? : ";
+	cin >> numCands;
+	cout << "How many seats are there? : ";
+	cin >> numSeats;
+	cout << "How many voters are there? : ";
+	cin >> numVoters;
+}
+
+//****************************************************************************************************
+
+void getNames(int & numCands, vector<string> & candNames, map<string,int> & candidates)
+{
+	for(int i = 0; i < numCands; i++)
+	{
+		candNames.push_back(addCandidates(candidates));
+	}
+}
+
+//****************************************************************************************************
+
+//Gets all the votes from voters
+void getVotes(int & numVoters, int & numCands, vector<string> candNames)
+{
+	for(int i = 0; i < numVoters; i++)
+	{
+		for(int j = 0; j < numCands; j++)
+		{
+			cout << "Candidate " << j + 1 << ": " << candNames.at(j) << endl;
+		}
+		Ballot b;
+		int n;
+		for(int j = 0; j < numCands; j++)
+		{
+			cin >> n;
+			b.add(candNames[n - 1]);
+		}
+		cout << endl;
+	}
+}
+
+//****************************************************************************************************
+
+string addCandidates(map<string, int> & map)
+{
+	string n;
+	cout << "Enter candidate's name: ";
+	cin >> n;
+	map[n] = 0;
+	return n;
+}
+
+//****************************************************************************************************
+
+
+
+//****************************************************************************************************
