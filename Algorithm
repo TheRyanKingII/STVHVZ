@@ -4,33 +4,8 @@
 
 using namespace std;
 
-struct Ballot
-{
-	vector<string> votes;
+//*************************************************************************************************************
 
-	void add(string s)
-	{
-		votes.push_back(s);
-	}
-
-	void remove()
-	{
-		votes.erase(votes.begin());
-	}
-};
-
-string addCandidates(map<string, int> & map)
-{
-	string n;
-	cout << "Enter candidate's name: ";
-	cin >> n;
-	map[n] = 0;
-	return n;
-}
-
-
-
-//----------------------------------------------------------
 int main()
 {
 	vector<string> candNames;
@@ -126,4 +101,32 @@ int main()
 	}
 
 	return 0;
+}
+
+//******************************************************************************************************************
+
+struct Ballot
+{
+	vector<string> votes;
+
+	void add(string s)
+	{
+		votes.push_back(s);
+	}
+
+	void remove()
+	{
+		votes.erase(votes.begin());
+	}
+};
+
+//******************************************************************************************************************
+
+string addCandidates(map<string, int> & map)
+{
+	string n;
+	cout << "Enter candidate's name: ";
+	cin >> n;
+	map[n] = 0;
+	return n;
 }
