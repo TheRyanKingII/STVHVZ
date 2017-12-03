@@ -91,6 +91,17 @@ int main()
 
 	}
 
+	cout << "Winners: ";
+
+	for(int i = 0; i < winners.size(); i++)
+	{
+		cout << winners[i];
+		if(i + 1 < winners.size())
+			cout << ", ";
+	}
+
+	cout << endl << endl;
+
 	return 0;
 }
 
