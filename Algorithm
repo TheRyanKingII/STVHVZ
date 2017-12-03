@@ -93,9 +93,19 @@ int main()
         winners.push_back(candNames[i]);
         seatsFilled++;
         surplus = candidate[winners.back()]-quota;
-        if(surplus)
+        if(surplus > 0)
         {
-
+          map<string,int> proportions;
+          for(int x = 0; x < numCands; x++)
+          {
+            for(int y = 0; y < surplus; y++)
+            {
+              if()
+              {
+                
+              }
+            }
+          }
         }
         else
         {
