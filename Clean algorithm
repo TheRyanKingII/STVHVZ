@@ -64,14 +64,14 @@ int main()
 					for (int z = 0; z < numCands; z++)
 					{
 						proportions[candNames[z]] = 0;
-					}					
-					for (int y = 0; y < candidates[winners.back()]; y++)
+					}
+					for (int y = 0; y < ballots.size(); y++)
 					{
-						if (ballots[i].votes[i] == winners[winners.size()-1] && i + 1 < numCands)
+						if (ballots[y].votes[i] == winners[winners.size() - 1] && i + 1 < numCands)
 						{
 							for (int x = 0; x < numCands; x++)
 							{
-								if (candNames[x] == ballots[i].votes[i+1])
+								if (candNames[x] == ballots[i].votes[i + 1])
 								{
 									proportions[candNames[x]]++;
 								}
@@ -81,12 +81,30 @@ int main()
 					for (int z = 0; z < numCands; z++)
 					{
 						candidates[candNames[z]] += ((proportions[candNames[z]] / candidates[winners.back()]) * surplus);
-					}					
+					}
 				}
-				else
+				candidates.erase(winners.back());
+			}
+			else if (i + 1 >= numCands)
+			{
+				int lowest = candidates[candNames[0]];
+				string lowName = candNames[0];
+				for (int y = 1; y < numCands; y++)
 				{
-					candidates.erase(winners.back());
+					if (candidates[candNames[y]] < lowest)
+					{
+						lowest = candidates[candNames[y]];
+						lowName = candNames[y];
+					}
 				}
+				for (int z = 0; z <ballots.size(); z++)
+				{
+					if (ballots[z].votes[0] == lowName && z + 1 < numCands)
+					{
+						candidates[ballots[z].votes[1]]++;
+					}
+				}
+				candidates.erase(lowName);
 			}
 		}
 
