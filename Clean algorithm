@@ -79,7 +79,7 @@ int main()
 				}
 				else
 				{
-					candidates[winners.end].erase();
+					candidates.erase(winners.back());
 				}
 			}
 		}
