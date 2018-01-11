@@ -2,12 +2,13 @@
 #include<string>
 #include<vector>
 #include<map>
+#include<cmath>
 #include "ballot.h"
 
 using namespace std;
 
 void getBasicInfo(int & numCands, int & numSeats, int & numVoters);
-void getNames(int & numCands, vector<string> & candNames, map<string,int> & candidates);
+void getNames(int & numCands, vector<string> & candNames, map<string, int> & candidates);
 void getVotes(int & numVoters, int & numCands, vector<string> candNames, vector<Ballot> & ballots);
 string addCandidates(map<string, int> & map);
 void declareWinners(vector<string> & winners);
@@ -25,7 +26,7 @@ int main()
 
 	getBasicInfo(numCands, numSeats, numVoters);
 
-	quota = (numVoters / (numSeats + 1)) + 1;
+	quota = ceil((numVoters / (numSeats + 1))) + 1;
 
 	getNames(numCands, candNames, candidates);
 
@@ -99,7 +100,7 @@ int main()
 				}
 				for (int z = 0; z <ballots.size(); z++)
 				{
-					if (ballots[z].votes[0] == lowName && z + 1 < numCands)
+					if (ballots[z].votes[0] == lowName && i < numCands)
 					{
 						candidates[ballots[z].votes[1]]++;
 					}
@@ -111,8 +112,9 @@ int main()
 	}
 
 	declareWinners(winners);
-
+	system("PAUSE");
 	return 0;
+	
 }
 
 //****************************************************************************************************
@@ -129,9 +131,9 @@ void getBasicInfo(int & numCands, int & numSeats, int & numVoters)
 
 //****************************************************************************************************
 
-void getNames(int & numCands, vector<string> & candNames, map<string,int> & candidates)
+void getNames(int & numCands, vector<string> & candNames, map<string, int> & candidates)
 {
-	for(int i = 0; i < numCands; i++)
+	for (int i = 0; i < numCands; i++)
 	{
 		candNames.push_back(addCandidates(candidates));
 	}
@@ -142,15 +144,15 @@ void getNames(int & numCands, vector<string> & candNames, map<string,int> & cand
 //Gets all the votes from voters
 void getVotes(int & numVoters, int & numCands, vector<string> candNames, vector<Ballot> & ballots)
 {
-	for(int i = 0; i < numVoters; i++)
+	for (int i = 0; i < numVoters; i++)
 	{
-		for(int j = 0; j < numCands; j++)
+		for (int j = 0; j < numCands; j++)
 		{
 			cout << "Candidate " << j + 1 << ": " << candNames.at(j) << endl;
 		}
 		Ballot b;
 		int n;
-		for(int j = 0; j < numCands; j++)
+		for (int j = 0; j < numCands; j++)
 		{
 			cin >> n;
 			b.add(candNames[n - 1]);
@@ -179,10 +181,10 @@ void declareWinners(vector<string> & winners)
 {
 	cout << "Winners: ";
 
-	for(int i = 0; i < winners.size(); i++)
+	for (int i = 0; i < winners.size(); i++)
 	{
 		cout << winners[i];
-		if(i + 1 < winners.size())
+		if (i + 1 < winners.size())
 			cout << ", ";
 	}
 
