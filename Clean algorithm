@@ -34,23 +34,22 @@ int main()
 
 	getVotes(numVoters, numCands, candNames, ballots);
 
-	while (seatsFilled < numSeats)
+	//Tallies every voter's first vote and adds it to candidate
+	for (int i = 0; i < numCands; i++)
 	{
-		//Tallies every voter's first vote and adds it to candidate
-		for (int i = 0; i < numCands; i++)
+		votes = 0;
+		for (int j = 0; j < ballots.size(); j++)
 		{
-			votes = 0;
-			for (int j = 0; j < ballots.size(); j++)
+			if (candNames[i] == ballots[j].votes[0])
 			{
-				if (candNames[i] == ballots[j].votes[0])
-				{
-					votes++;
-				}
+				votes++;
 			}
-
-			candidates[candNames[i]] = votes;
 		}
 
+		candidates[candNames[i]] = votes;
+	}
+	while (seatsFilled < numSeats)
+	{
 		//Does candidate meet/exceed quota
 		for (int i = 0; i < numCands; i++)
 		{
@@ -114,7 +113,7 @@ int main()
 	declareWinners(winners);
 	system("PAUSE");
 	return 0;
-	
+
 }
 
 //****************************************************************************************************
